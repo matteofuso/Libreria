@@ -1,5 +1,6 @@
 <?php
 include 'database/connect.php';
+include "database/query.php";
 include 'database/printTable.php';
 $nav_page = 'Visualizza';
 ?>
@@ -22,17 +23,17 @@ $nav_page = 'Visualizza';
 <?php include 'componenti/header.php'; ?>
 
 <main class="flex-grow-1 my-4 mx-3">
+    <?php include 'componenti/err.php'; ?>
     <h1>Visualizzazione</h1>
     <p>Visualizza la lista di tutti i libri in catalogo</p>
     <?php
-    try{
-        $stm = $db->prepare('SELECT * FROM libri');
-        $stm->execute();
-        $libri = $stm->fetchAll();
+    $query = 'select l.id as "#", l.titolo, a.nome as autore, g.genere, l.prezzo, l.anno_pubblicazione from libri l join autori a on a.id = l.autore join generi g on g.id = l.genere;';
+    try {
+        $libri = select($db, $query);
         printTable($libri);
-    } catch (PDOException $e) {
+    } catch (Exception $e) {
         echo '<p>Non ci è stato possibile visualizzare i libri, perfavore riprova più tardi</p>';
-        errlog($e, 'visualizza');
+        errlog($e, 'log/visualizza.log');
     }
     ?>
 </main>
