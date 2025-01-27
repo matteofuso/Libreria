@@ -11,7 +11,7 @@ select * from autori;
 create table generi (
 	id INT auto_increment primary key,
 	genere varchar(52)
-)
+);
 drop table generi;
 select * from generi;
 

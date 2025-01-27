@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     }
 
     try {
-        query($db, 'INSERT INTO libris (titolo, autore, genere, prezzo, anno_pubblicazione) VALUES (:titolo, :autore, :genere, :prezzo, :anno_pubblicazione)', [
+        query($db, 'INSERT INTO libri (titolo, autore, genere, prezzo, anno_pubblicazione) VALUES (:titolo, :autore, :genere, :prezzo, :anno_pubblicazione)', [
             ':titolo' => $title,
             ':autore' => $author,
             ':genere' => $genre,

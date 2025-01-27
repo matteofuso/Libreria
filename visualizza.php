@@ -23,11 +23,11 @@ $nav_page = 'Visualizza';
 <?php include 'componenti/header.php'; ?>
 
 <main class="flex-grow-1 my-4 mx-3">
-    <?php include 'componenti/err.php'; ?>
-    <h1>Visualizzazione</h1>
+    <?php include 'componenti/error.php'; ?>
+    <h1>Libri</h1>
     <p>Visualizza la lista di tutti i libri in catalogo</p>
     <?php
-    $query = 'select l.id as "#", l.titolo, a.nome as autore, g.genere, l.prezzo, l.anno_pubblicazione from libri l join autori a on a.id = l.autore join generi g on g.id = l.genere;';
+    $query = 'select l.id as "#", l.titolo, a.nome as autore, g.genere, concat(l.prezzo, " €") as prezzo, l.anno_pubblicazione from libri l join autori a on a.id = l.autore join generi g on g.id = l.genere;';
     try {
         $libri = select($db, $query);
         printTable($libri);
@@ -36,6 +36,36 @@ $nav_page = 'Visualizza';
         errlog($e, 'log/visualizza.log');
     }
     ?>
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Autori</h3>
+            <p>Visualizza la lista di tutti gli autori</p>
+            <?php
+            $query = 'select a.id as "#", a.nome from autori a;';
+            try {
+                $autori = select($db, $query);
+                printTable($autori);
+            } catch (Exception $e) {
+                echo '<p>Non ci è stato possibile visualizzare gli autori, perfavore riprova più tardi</p>';
+                errlog($e, 'log/visualizza.log');
+            }
+            ?>
+        </div>
+        <div class="col-md-6">
+            <h3>Generi</h3>
+            <p>Visualizza la lista di tutti i generi</p>
+            <?php
+            $query = 'select g.id as "#", g.genere from generi g;';
+            try {
+                $generi = select($db, $query);
+                printTable($generi);
+            } catch (Exception $e) {
+                echo '<p>Non ci è stato possibile visualizzare i generi, perfavore riprova più tardi</p>';
+                errlog($e, 'log/visualizza.log');
+            }
+            ?>
+        </div>
+    </div>
 </main>
 
 <?php include 'componenti/footer.php'; ?>
