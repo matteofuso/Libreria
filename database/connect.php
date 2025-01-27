@@ -11,7 +11,7 @@ if (!isset($_GET['err']) || !$_GET['err'] === '0') {
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
         ]);
     } catch (PDOException $e) {
-        errlog($e, 'log/connect.log');
+        errlog($e, '../log/connect.log');
         header('Location: ?err=0');
         exit();
     }

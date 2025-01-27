@@ -22,7 +22,7 @@ $nav_page = 'Inserisci';
 <?php include 'componenti/header.php'; ?>
 
 <main class="flex-grow-1 my-4 mx-3">
-    <?php include 'componenti/error.php';?>
+    <?php include 'componenti/alert.php';?>
     <form method="post" action="database/insert.php" class="px-4">
         <h1>Inserimento</h1>
         <p>Inserisci i dati necessari ad aggiungere il libro</p>

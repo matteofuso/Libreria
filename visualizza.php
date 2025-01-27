@@ -23,7 +23,7 @@ $nav_page = 'Visualizza';
 <?php include 'componenti/header.php'; ?>
 
 <main class="flex-grow-1 my-4 mx-3">
-    <?php include 'componenti/error.php'; ?>
+    <?php include 'componenti/alert.php'; ?>
     <h1>Libri</h1>
     <p>Visualizza la lista di tutti i libri in catalogo</p>
     <?php
