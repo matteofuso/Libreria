@@ -33,7 +33,7 @@ $nav_page = 'Catalogo';
         printTable($libri);
     } catch (Exception $e) {
         echo '<p>Non ci è stato possibile visualizzare i libri, perfavore riprova più tardi</p>';
-        errlog($e, 'log/visualizza.log');
+        errlog($e, 'log/catalogo.log');
     }
     ?>
     <div class="row">
@@ -47,7 +47,7 @@ $nav_page = 'Catalogo';
                 printTable($autori);
             } catch (Exception $e) {
                 echo '<p>Non ci è stato possibile visualizzare gli autori, perfavore riprova più tardi</p>';
-                errlog($e, 'log/visualizza.log');
+                errlog($e, 'log/catalogo.log');
             }
             ?>
         </div>
@@ -61,7 +61,7 @@ $nav_page = 'Catalogo';
                 printTable($generi);
             } catch (Exception $e) {
                 echo '<p>Non ci è stato possibile visualizzare i generi, perfavore riprova più tardi</p>';
-                errlog($e, 'log/visualizza.log');
+                errlog($e, 'log/catalogo.log');
             }
             ?>
         </div>

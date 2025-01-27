@@ -11,6 +11,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $new_author = trim($_POST['new-author']);
     $year = trim($_POST['year']);
 
+    if ($db === null){
+        header('Location: ../inserisci.php?err=0');
+        exit();
+    }
+
     try {
         if ($genre === '-1'){
             if (select($db, 'select * from generi where genere = :genere', [':genere' => $new_genre])){
@@ -22,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
         }
     } catch (Exception $e) {
         errlog($e, '../log/inserisci.log');
-        header('Location: ../inserisci.php?err=0');
+        header('Location: ../inserisci.php?err=1');
         exit();
     }
 
@@ -37,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
         }
     } catch (Exception $e) {
         errlog($e, '../log/inserisci.log');
-        header('Location: ../inserisci.php?err=1');
+        header('Location: ../inserisci.php?err=2');
         exit();
     }
 
@@ -51,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
         ]);
     } catch (Exception $e) {
         errlog($e, '../log/inserisci.log');
-        header('Location: ../inserisci.php?err=2');
+        header('Location: ../inserisci.php?err=3');
         exit();
     }
     header('Location: ../catalogo.php?succ=0');

@@ -1,7 +1,7 @@
 <?php
 
 $db = null;
-if (!isset($_GET['err']) || !$_GET['err'] === '0') {
+if (!isset($_GET['err']) || $_GET['err'] != '0') {
     try {
         $db = new PDO(
             'mysql:host=localhost;dbname=libreria',
@@ -13,7 +13,6 @@ if (!isset($_GET['err']) || !$_GET['err'] === '0') {
     } catch (PDOException $e) {
         errlog($e, '../log/connect.log');
         header('Location: ?err=0');
-        exit();
     }
 }
 
