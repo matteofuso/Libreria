@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
         header('Location: ../inserisci.php?err=2');
         exit();
     }
-    header('Location: ../visualizza.php');
+    header('Location: ../catalogo.php?succ=0');
 } else {
     if (isset($_GET['err'])){
         header("Location: ../inserisci.php?err=$_GET[err]");

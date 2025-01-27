@@ -1,7 +1,7 @@
 <?php
 $pages = [
     "Home" => ".",
-    "Visualizza" => "visualizza.php",
+    "Catalogo" => "catalogo.php",
     "Inserisci" => "inserisci.php",
     "Modifica" => "modifica.php",
 ];

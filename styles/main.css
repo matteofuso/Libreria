@@ -34,3 +34,34 @@ body{
     width: 100%;
     overflow-x: auto;
 }
+
+.hero {
+    background-image: url('../images/hero.webp');
+    background-size: cover;
+    background-position: center;
+    height: 40vh;
+}
+
+.hero .overlay {
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Transparent black overlay */
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
+
+.accordion-item {
+    border: 1px solid #ddd;
+}

@@ -2,7 +2,7 @@
 include 'database/connect.php';
 include "database/query.php";
 include 'database/printTable.php';
-$nav_page = 'Visualizza';
+$nav_page = 'Catalogo';
 ?>
 
 <!doctype html>
@@ -17,7 +17,7 @@ $nav_page = 'Visualizza';
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="styles/main.css">
     <link rel="icon" type="image/x-icon" href="images/logo.png">
-    <title>Libreria - Visualizza</title>
+    <title>Libreria - Catalogo</title>
 </head>
 <body class="d-flex flex-column">
 <?php include 'componenti/header.php'; ?>
@@ -27,7 +27,7 @@ $nav_page = 'Visualizza';
     <h1>Libri</h1>
     <p>Visualizza la lista di tutti i libri in catalogo</p>
     <?php
-    $query = 'select l.id as "#", l.titolo, a.nome as autore, g.genere, concat(l.prezzo, " €") as prezzo, l.anno_pubblicazione from libri l join autori a on a.id = l.autore join generi g on g.id = l.genere;';
+    $query = 'select l.id as "#", l.titolo, a.nome as autore, g.genere, concat(l.prezzo, " €") as prezzo, l.anno_pubblicazione from libri l join autori a on a.id = l.autore join generi g on g.id = l.genere order by l.id asc;';
     try {
         $libri = select($db, $query);
         printTable($libri);
@@ -39,7 +39,7 @@ $nav_page = 'Visualizza';
     <div class="row">
         <div class="col-md-6">
             <h3>Autori</h3>
-            <p>Visualizza la lista di tutti gli autori</p>
+            <p>Visualizza la lista di tutti gli autori presenti in catalogo</p>
             <?php
             $query = 'select a.id as "#", a.nome from autori a;';
             try {
@@ -53,7 +53,7 @@ $nav_page = 'Visualizza';
         </div>
         <div class="col-md-6">
             <h3>Generi</h3>
-            <p>Visualizza la lista di tutti i generi</p>
+            <p>Visualizza la lista di tutti i generi presenti in catalogo</p>
             <?php
             $query = 'select g.id as "#", g.genere from generi g;';
             try {
