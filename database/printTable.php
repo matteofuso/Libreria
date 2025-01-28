@@ -1,6 +1,10 @@
 <?php
 
 function printTable(array $stdArray): void{
+    if (count($stdArray) == 0){
+        echo '<p>Non ci sono elementi da visualizzare</p>';
+        return;
+    }
     echo '<div class="control-overflow"><table class="table table-hover table-bordered table-striped">';
     foreach ($stdArray[0] as $key => $value){
         echo '<th>' . ucfirst(str_replace("_", " ", $key)) . '</th>';
@@ -12,5 +16,5 @@ function printTable(array $stdArray): void{
         }
         echo '</tr>';
     }
-    echo '</table></div>';
+    echo '</table></div>'.PHP_EOL;
 }

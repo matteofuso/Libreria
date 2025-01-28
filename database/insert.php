@@ -1,6 +1,7 @@
 <?php
 include 'connect.php';
 include 'query.php';
+/**@var $db */
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $title = trim($_POST['title']);
