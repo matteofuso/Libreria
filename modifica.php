@@ -70,10 +70,10 @@ $main_classes = 'container my-4';
                 </div>
                 <p class="modal-body" id="deleteFormText"></p>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
                     <input name="id" id="deleteFormId" type="hidden" value="">
                     <input name="resource" id="deleteFormResource" type="hidden" value="">
-                    <button type="submin" class="btn btn-danger">Save changes</button>
+                    <button type="submin" class="btn btn-danger">Elimina</button>
                 </div>
             </div>
         </div>
@@ -89,14 +89,15 @@ $main_classes = 'container my-4';
                     <?php require 'componenti/inputLibri.php'; ?>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
                     <input name="id" id="editFormId" type="hidden" value="">
                     <input name="resource" id="editFormResource" type="hidden" value="">
-                    <button type="submin" class="btn btn-success">Save changes</button>
+                    <button type="submin" class="btn btn-success">Modifica</button>
                 </div>
             </div>
         </div>
     </form>
 </div>
 <script src="scripts/modifica.js"></script>
+<script src="scripts/form.js"></script>
 <?php require 'componenti/footer.php'; ?>

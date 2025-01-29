@@ -58,6 +58,9 @@ function editLibro(btn, id){
         }
     }
 
+    document.getElementById("new-genre").parentElement.classList.add("d-none")
+    document.getElementById("new-author").parentElement.classList.add("d-none")
+
     editFormId.value = id;
     editFormResource.value = "libri";
 }

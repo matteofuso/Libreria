@@ -22,8 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $new_author = trim($_POST['new-author']) ?? '';
             $year = trim($_POST['year']) ?? '';
 
-            if ($title === '' || $genre === '' || $price === '' || $author === '' || $year === '') {
-                header('Location: ../modifica.php?err=9');
+            if ($title === '' || $genre === '' || $price === '' || $author === '' || $year === '' || ($author === '-1' && $new_author === '') || ($genre === '1' && $new_genre === '')) {
+                header('Location: ../inserisci.php?err=9');
                 exit();
             }
 
