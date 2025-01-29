@@ -16,8 +16,8 @@ $main_classes = 'container my-4';
     $query = 'select l.id, l.titolo, a.nome, g.genere, concat(l.prezzo, " €") as price, l.anno_pubblicazione from libri l join autori a on a.id = l.autore join generi g on g.id = l.genere order by l.id asc;';
     try {
         $libri = select($db, $query);
-        printTable(["#", "Titolo", "Nome", "Genere", "Prezzo", "Anno di Pubblicazione", "Azione"], $libri, [
-                function($row) { return '<button class="btn btn-primary btn-sm d-inline-flex align-items-center me-2"><svg class="bi my-1 theme-icon-active" width="1em" height="1em"><use href="#edit"></use></svg></button>'; },
+        printTable(["#", "Titolo", "Autore", "Genere", "Prezzo", "Anno di Pubblicazione", "Azione"], $libri, [
+                function($row) { return '<button class="btn btn-primary btn-sm d-inline-flex align-items-center me-2" data-bs-toggle="modal" data-bs-target="#editLibro" onclick="editLibro(this, '. $row->id . ')"><svg class="bi my-1 theme-icon-active" width="1em" height="1em"><use href="#edit"></use></svg></button>'; },
                 function($row) { return '<button class="btn btn-danger btn-sm d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#deleteForm" onclick="deleteResource(\'libri\', '. $row->id . ')"><svg class="bi my-1 theme-icon-active" width="1em" height="1em"><use href="#delete"></use></svg></button>'; },
         ]);
     } catch (Exception $e) {
@@ -61,7 +61,7 @@ $main_classes = 'container my-4';
         }
         ?>
     </div>
-    <form method="post" action="database/delete.php?resource=libro" class="modal faded" id="deleteForm" tabindex="-1" aria-labelledby="deleteFormTitle" aria-hidden="true">
+    <form method="post" action="database/delete.php" class="modal faded" id="deleteForm" tabindex="-1" aria-labelledby="deleteFormTitle" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -74,6 +74,25 @@ $main_classes = 'container my-4';
                     <input name="id" id="deleteFormId" type="hidden" value="">
                     <input name="resource" id="deleteFormResource" type="hidden" value="">
                     <button type="submin" class="btn btn-danger">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <form method="post" action="database/edit.php" class="modal faded" id="editLibro" tabindex="-1" aria-labelledby="editLibroTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="editLibroTitle">Modifica Libro</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="deleteFormText">
+                    <?php require 'componenti/inputLibri.php'; ?>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <input name="id" id="editFormId" type="hidden" value="">
+                    <input name="resource" id="editFormResource" type="hidden" value="">
+                    <button type="submin" class="btn btn-success">Save changes</button>
                 </div>
             </div>
         </div>

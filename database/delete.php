@@ -5,9 +5,14 @@ include 'query.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     if (isset($_POST['resource'])){
-        var_dump($_POST);
-        $resource = $_POST['resource'];
-        $id = $_POST['id'];
+        $resource = $_POST['resource'] ?? '';
+        $id = $_POST['id'] ?? '';
+
+        if ($resource === '' || $id === '') {
+            header('Location: ../modifica.php?err=9');
+            exit();
+        }
+
         if ($resource == 'libri' || $resource == 'autori' || $resource == 'generi'){
             $code = match($resource){
                 'libri' => 1,

@@ -9,7 +9,10 @@ if (isset($_GET['err'])) {
         '3' => 'Errore nell\'inserimento del libro',
         '4' => 'Errore nell\'eliminazione del libro',
         '5' => 'Errore nell\'eliminazione dell\'autore, controlla che non ci siano libri associati',
-        '6' => 'Errore nell\'eliminazione del genere, controlla che non ci siano libri associati'
+        '6' => 'Errore nell\'eliminazione del genere, controlla che non ci siano libri associati',
+        '7' => 'Libro già presente in catalogo',
+        '8' => 'Errore nella modifica del libro',
+        '9' => 'Errore nella richiesta',
     ];
     $err = $_GET['err'];
     if (!array_key_exists($err, $errors)) {
@@ -28,7 +31,8 @@ if (isset($_GET['succ'])){
         '0' => 'Libro inserito con successo',
         '1' => 'Libro eliminato con successo',
         '2' => 'Autore eliminato con successo',
-        '3' => 'Genere eliminato con successo'
+        '3' => 'Genere eliminato con successo',
+        '4' => 'Libro modificato con successo',
     ];
     $succ = $_GET['succ'];
     if (!array_key_exists($succ, $successes)) {

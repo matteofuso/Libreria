@@ -15,7 +15,7 @@ $main_classes = 'container my-4';
         $query = 'select l.id, l.titolo, a.nome, g.genere, concat(l.prezzo, " €") as price, l.anno_pubblicazione from libri l join autori a on a.id = l.autore join generi g on g.id = l.genere order by l.id asc;';
         try {
             $libri = select($db, $query);
-            printTable(["#", "Titolo", "Nome", "Genere", "Prezzo", "Anno di Pubblicazione"], $libri);
+            printTable(["#", "Titolo", "Autore", "Genere", "Prezzo", "Anno di Pubblicazione"], $libri);
         } catch (Exception $e) {
             echo '<p>Non ci è stato possibile visualizzare i libri, perfavore riprova più tardi</p>';
             errlog($e, 'log/catalogo.log');

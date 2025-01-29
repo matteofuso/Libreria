@@ -24,3 +24,40 @@ function deleteResource(resource, id){
     deleteFormId.value = id;
     deleteFormResource.value = resource;
 }
+
+const editFormId = document.getElementById("editFormId");
+const editFormResource = document.getElementById("editFormResource");
+
+function editLibro(btn, id){
+    row = btn.parentElement.parentElement;
+    id = row.cells[0].innerHTML;
+    titolo = row.cells[1].innerHTML;
+    autore = row.cells[2].innerHTML;
+    genere = row.cells[3].innerHTML;
+    prezzo = row.cells[4].innerHTML.slice(0, -2);
+    anno = row.cells[5].innerHTML;
+
+    document.getElementById("title").value = titolo;
+    document.getElementById("price").value = prezzo;
+    document.getElementById("year").value = anno;
+
+    // loop the select
+    authors = document.getElementById("author").options;
+    for (let i = 0; i < authors.length; i++) {
+        if (authors[i].text === autore) {
+            authors[i].selected = true;
+            break;
+        }
+    }
+
+    genres = document.getElementById("genre").options;
+    for (let i = 0; i < genres.length; i++) {
+        if (genres[i].text === genere) {
+            genres[i].selected = true;
+            break;
+        }
+    }
+
+    editFormId.value = id;
+    editFormResource.value = "libri";
+}
