@@ -79,4 +79,5 @@ $main_classes = 'container my-4';
         </div>
         <input type="submit" class="btn btn-primary" value="Inserisci il libro">
     </form>
+    <script src="scripts/form.js"></script>
 <?php include 'componenti/footer.php'; ?>

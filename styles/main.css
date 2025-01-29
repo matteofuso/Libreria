@@ -65,3 +65,8 @@ body{
 .accordion-item {
     border: 1px solid #ddd;
 }
+
+.table-fit{
+    white-space: nowrap;
+    width: 1%;
+}
