@@ -6,7 +6,10 @@ if (isset($_GET['err'])) {
         '0' => 'Impossibile connettersi al database',
         '1' => 'Errore nell\'inserimento del genere',
         '2' => 'Errore nell\'inserimento dell\'autore',
-        '3' => 'Errore nell\'inserimento del libro'
+        '3' => 'Errore nell\'inserimento del libro',
+        '4' => 'Errore nell\'eliminazione del libro',
+        '5' => 'Errore nell\'eliminazione dell\'autore, controlla che non ci siano libri associati',
+        '6' => 'Errore nell\'eliminazione del genere, controlla che non ci siano libri associati'
     ];
     $err = $_GET['err'];
     if (!array_key_exists($err, $errors)) {
@@ -23,6 +26,9 @@ if (isset($_GET['succ'])){
     $successes = [
         '-1' => 'Operazione completata con successo',
         '0' => 'Libro inserito con successo',
+        '1' => 'Libro eliminato con successo',
+        '2' => 'Autore eliminato con successo',
+        '3' => 'Genere eliminato con successo'
     ];
     $succ = $_GET['succ'];
     if (!array_key_exists($succ, $successes)) {
