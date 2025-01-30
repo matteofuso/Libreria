@@ -1,7 +1,6 @@
 <?php
-include 'connect.php';
-include 'query.php';
-/**@var $db */
+include "../functions/Database.php";
+include "../functions/Log.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = trim($_POST['title']) ?? '';
@@ -12,18 +11,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $new_author = trim($_POST['new-author']) ?? '';
     $year = trim($_POST['year']) ?? '';
 
-    if ($title === '' || $genre === '' || $price === '' || $author === '' || $year === '' || ($author === '-1' && $new_author === '') || ($genre === '1' && $new_genre === '')) {
-        header('Location: ../inserisci.php?err=9');
+    if (empty($title) || empty($genre) || empty($price) || empty($author) || empty($year) || ($author === '-1' && empty($new_author)) || ($genre === '-1' && empty($new_genre))) {
+        http_response_code(400);
         exit();
     }
 
-    if ($db === null) {
-        header('Location: ../inserisci.php?err=0');
+    if (Database::connect() == null)
+    {
+        header("Location: ../inserisci.php?err=0");
         exit();
     }
 
     try {
-        if(select($db, 'select * from libri where titolo = :titolo and autore = :autore and genere = :genere and anno_pubblicazione = :anno_pubblicazione', [
+        if(Database::select('select * from libri where titolo = :titolo and autore = :autore and genere = :genere and anno_pubblicazione = :anno_pubblicazione', [
             ':titolo' => $title,
             ':autore' => $author,
             ':genere' => $genre,
@@ -32,45 +32,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Location: ../inserisci.php?err=7');
             exit();
         }
-
     } catch (Exception $e) {
-        errlog($e, '../log/inserisci.log');
+        Log::errlog($e, '../log/inserisci.log');
         header('Location: ../inserisci.php?err=3');
         exit();
     }
 
     try {
         if ($genre === '-1') {
-            if (select($db, 'select * from generi where genere = :genere', [':genere' => $new_genre])) {
-                $genre = select($db, 'select id from generi where genere = :genere', [':genere' => $new_genre])[0]->id;
+            $genres = Database::select('select * from generi where genere = :genere', [':genere' => $new_genre]);
+            if ($genres) {
+                $genre = $genres[0]->id;
             } else {
-                query($db, 'insert into generi (genere) values (:genere)', [':genere' => $new_genre]);
-                $genre = $db->lastInsertId();
+                Database::query('insert into generi (genere) values (:genere)', [':genere' => $new_genre]);
+                $genre = Database::connect()->lastInsertId();
             }
         }
     } catch (Exception $e) {
-        errlog($e, '../log/inserisci.log');
+        Log::errlog($e, '../log/inserisci.log');
         header('Location: ../inserisci.php?err=1');
         exit();
     }
 
     try {
         if ($author === '-1') {
-            if (select($db, 'select * from autori where nome = :nome', [':nome' => $new_author])) {
-                $author = select($db, 'select id from autori where nome = :nome', [':nome' => $new_author])[0]->id;
+            $authors = Database::select('select * from autori where nome = :nome', [':nome' => $new_author]);
+            if ($authors) {
+                $author = $authors[0]->id;
             } else {
-                query($db, 'insert into autori (nome) values (:nome)', [':nome' => $new_author]);
-                $author = $db->lastInsertId();
+                Database::query('insert into autori (nome) values (:nome)', [':nome' => $new_author]);
+                $author = Database::connect()->lastInsertId();
             }
         }
     } catch (Exception $e) {
-        errlog($e, '../log/inserisci.log');
+        Log::errlog($e, '../log/inserisci.log');
         header('Location: ../inserisci.php?err=2');
         exit();
     }
 
     try {
-        query($db, 'INSERT INTO libri (titolo, autore, genere, prezzo, anno_pubblicazione) VALUES (:titolo, :autore, :genere, :prezzo, :anno_pubblicazione)', [
+        Database::query('INSERT INTO libri (titolo, autore, genere, prezzo, anno_pubblicazione) VALUES (:titolo, :autore, :genere, :prezzo, :anno_pubblicazione)', [
             ':titolo' => $title,
             ':autore' => $author,
             ':genere' => $genre,
@@ -78,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':anno_pubblicazione' => $year
         ]);
     } catch (Exception $e) {
-        errlog($e, '../log/inserisci.log');
+        Log::errlog($e, '../log/inserisci.log');
         header('Location: ../inserisci.php?err=3');
         exit();
     }

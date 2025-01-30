@@ -1,8 +1,4 @@
-<?php
-$nav_page = 'Home';
-$main_classes = 'mb-4';
-require 'componenti/header.php';
-?>
+<?php $title = "Homepage"; $main_classes = ''; require 'componenti/header.php';?>
 <section class="hero w-100">
     <div class="overlay">
         <h1>La libreria</h1>

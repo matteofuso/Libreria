@@ -1,15 +1,21 @@
 <?php
-include 'connect.php';
-include 'query.php';
-/**@var $db */
+include "../functions/Database.php";
+include "../functions/Log.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+
+    if (Database::connect() == null)
+    {
+        header("Location: ../modifica.php?err=0");
+        exit();
+    }
+
     if (isset($_POST['resource'])){
-        $resource = $_POST['resource'] ?? '';
+        $resource = $_POST['resource'];
         $id = $_POST['id'] ?? '';
 
         if ($resource === '' || $id === '') {
-            header('Location: ../modifica.php?err=9');
+            http_response_code(400);
             exit();
         }
 
@@ -20,11 +26,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
                 'generi' => 3,
             };
             try {
-                query($db, 'delete from '. $resource .' where id = :id', [':id' => $id]);
+                Database::query("delete from $resource where id = :id", [':id' => $id]);
                 $succCode = $code;
                 header("Location: ../modifica.php?succ=$succCode");
             } catch (Exception $e) {
-                errlog($e, '../log/delete.log');
+                Log::errlog($e, '../log/delete.log');
                 $errcode = 3 + $code;
                 header("Location: ../modifica.php?err=$errcode");
             }

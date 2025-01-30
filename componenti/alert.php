@@ -1,5 +1,10 @@
 <?php
 
+if (Database::connect() == null)
+{
+    $_GET['err'] = '0';
+}
+
 if (isset($_GET['err'])) {
     $errors = [
         '-1' => 'Errore generico',
@@ -12,7 +17,8 @@ if (isset($_GET['err'])) {
         '6' => 'Errore nell\'eliminazione del genere, controlla che non ci siano libri associati',
         '7' => 'Libro già presente in catalogo',
         '8' => 'Errore nella modifica del libro',
-        '9' => 'Errore nella richiesta',
+        '9' => 'Errore nella modifica dell\'autore',
+        '10' => 'Errore nella modifica del genere',
     ];
     $err = $_GET['err'];
     if (!array_key_exists($err, $errors)) {
@@ -33,6 +39,8 @@ if (isset($_GET['succ'])){
         '2' => 'Autore eliminato con successo',
         '3' => 'Genere eliminato con successo',
         '4' => 'Libro modificato con successo',
+        '5' => 'Autore modificato con successo',
+        '6' => 'Genere modificato con successo',
     ];
     $succ = $_GET['succ'];
     if (!array_key_exists($succ, $successes)) {

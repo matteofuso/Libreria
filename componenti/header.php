@@ -1,11 +1,16 @@
 <?php /**@var $nav_page */ ?>
 <?php /**@var $main_classes */ ?>
 <?php $pages = [
-    "Home" => ".",
+    "Home" => "index.php",
     "Catalogo" => "catalogo.php",
     "Inserisci" => "inserisci.php",
     "Modifica" => "modifica.php",
-]; ?>
+];
+$file = $_SERVER['DOCUMENT_ROOT'] . $_SERVER['PHP_SELF'];
+$file = str_replace('\\', '/', $file);
+$main_classes = $main_classes ?? 'container my-4';
+/**@var $title*/
+?>
 
 <!doctype html>
 <html lang="it">
@@ -19,7 +24,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="styles/main.css">
     <link rel="icon" type="image/x-icon" href="images/logo.png">
-    <title>Libreria - <?= $nav_page ?></title>
+    <title>Libreria - <?= $title ?></title>
 </head>
 <body class="d-flex flex-column">
 <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
@@ -111,7 +116,9 @@
                 <ul class="navbar-nav my-3">
                     <?php
                     foreach ($pages as $page => $link) {
-                        $active = $page == $nav_page ? ' active' : '';
+                        $filename = realpath($link);
+                        $filename = str_replace('\\', '/', $filename);
+                        $active = $file === $filename ? ' active' : '';
                         echo "<li class=\"nav-item mx-2\"><a class=\"nav-link$active\" href=\"$link\">$page</a></li>";
                     }
                     ?>

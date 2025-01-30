@@ -11,12 +11,12 @@
             <option value="" selected disabled hidden class="text-secondary">Seleziona il genere</option>
             <?php
             try {
-                $generi = select($db, 'select * from generi;');
+                $generi = Database::select('select * from generi;');
                 foreach ($generi as $genere) {
                     echo "<option value=\"$genere->id\">$genere->genere</option>";
                 }
             } catch (Exception $e) {
-                errlog($e, 'log/inserisci.log');
+                Log::errlog($e, 'log/inserisci.log');
             }
             ?>
             <option value="-1">Inserisci un'altro genere...</option>
@@ -33,7 +33,8 @@
             <div class="input-group-text">€</div>
             <input name="price" type="number" class="form-control" id="price"
                    placeholder="19.99"
-                   step="0.01" required>
+                   step="0.01"
+                   min="0.01" required>
         </div>
     </div>
     <div class="mb-3 col-md-6">
@@ -43,12 +44,12 @@
             <option value="" selected disabled hidden class="text-secondary">Seleziona l'autore</option>
             <?php
             try {
-                $generi = select($db, 'select * from autori;');
+                $generi = Database::select('select * from autori;');
                 foreach ($generi as $genere) {
                     echo "<option value=\"$genere->id\">$genere->nome</option>";
                 }
             } catch (Exception $e) {
-                errlog($e, 'log/inserisci.log');
+                Log::errlog($e, 'log/inserisci.log');
             }
             ?>
             <option value="-1">Inserisci un'altro autore...</option>

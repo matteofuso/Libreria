@@ -3,7 +3,7 @@ const deleteFormText = document.getElementById("deleteFormText");
 const deleteFormId = document.getElementById("deleteFormId");
 const deleteFormResource = document.getElementById("deleteFormResource");
 
-const text = {
+const textElimina = {
     "libri": {
         "title": "Elimina libro",
         "text": "Sei sicuro di voler eliminare il libro?<br>Questa azione non è reversibile.",
@@ -19,14 +19,14 @@ const text = {
 }
 
 function deleteResource(resource, id){
-    deleteFormTitle.innerHTML = text[resource].title;
-    deleteFormText.innerHTML = text[resource].text;
+    deleteFormTitle.innerHTML = textElimina[resource].title;
+    deleteFormText.innerHTML = textElimina[resource].text;
     deleteFormId.value = id;
     deleteFormResource.value = resource;
 }
 
-const editFormId = document.getElementById("editFormId");
-const editFormResource = document.getElementById("editFormResource");
+const editLibroFormId = document.getElementById("editLibroFormId");
+const editLibroFormResource = document.getElementById("editLibroFormResource");
 
 function editLibro(btn, id){
     row = btn.parentElement.parentElement;
@@ -61,6 +61,38 @@ function editLibro(btn, id){
     document.getElementById("new-genre").parentElement.classList.add("d-none")
     document.getElementById("new-author").parentElement.classList.add("d-none")
 
+    editLibroFormId.value = id;
+    editLibroFormResource.value = "libri";
+}
+
+const textModifica = {
+    "autori": {
+        "title": "Modifica autore",
+        "label": "Modifica il nome dell'autore",
+        "placeholder": "J.K. Rowlink"
+    },
+    "generi": {
+        "title": "Modifica genere",
+        "label": "Modifica la denominazione del genere",
+        "placeholder": "Fantasy"
+    },
+}
+
+const editFormTitle = document.getElementById("editFormTitle");
+const newResourceLabel = document.getElementById("new-resource-label");
+const newResource = document.getElementById("new-resource");
+const editFormId = document.getElementById("editFormId");
+const editFormResource = document.getElementById("editFormResource");
+
+function editResource(btn, resource, id){
+    row = btn.parentElement.parentElement;
+    console.log(row.cells)
+
+    editFormTitle.innerHTML = textModifica[resource].title;
+    newResourceLabel.innerHTML = textModifica[resource].label;
+    newResource.placeholder = textModifica[resource].placeholder;
+    newResource.value = row.cells[1].innerHTML;
+
     editFormId.value = id;
-    editFormResource.value = "libri";
+    editFormResource.value = resource;
 }

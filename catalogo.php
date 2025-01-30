@@ -1,11 +1,11 @@
 <?php
-include 'database/connect.php';
-include "database/query.php";
-include 'database/printTable.php';
-$nav_page = 'Catalogo';
-$main_classes = 'container my-4';
-/**@var $db */
+include 'functions/Database.php';
+Database::connect();
+include 'functions/Helpers.php';
+include_once 'functions/Log.php';
+$title = "Catalogo";
 ?>
+
 <?php require 'componenti/header.php'; ?>
 <?php include 'componenti/alert.php'; ?>
     <div>
@@ -14,11 +14,11 @@ $main_classes = 'container my-4';
         <?php
         $query = 'select l.id, l.titolo, a.nome, g.genere, concat(l.prezzo, " €") as price, l.anno_pubblicazione from libri l join autori a on a.id = l.autore join generi g on g.id = l.genere order by l.id asc;';
         try {
-            $libri = select($db, $query);
-            printTable(["#", "Titolo", "Autore", "Genere", "Prezzo", "Anno di Pubblicazione"], $libri);
+            $libri = Database::select($query);
+            Helpers::printTable(["#", "Titolo", "Autore", "Genere", "Prezzo", "Anno di Pubblicazione"], $libri);
         } catch (Exception $e) {
             echo '<p>Non ci è stato possibile visualizzare i libri, perfavore riprova più tardi</p>';
-            errlog($e, 'log/catalogo.log');
+            Log::errlog($e, 'log/catalogo.log');
         }
         ?>
     </div>
