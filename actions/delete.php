@@ -1,6 +1,6 @@
 <?php
 include "../functions/Database.php";
-include "../functions/Log.php";
+include_once "../functions/Log.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 
