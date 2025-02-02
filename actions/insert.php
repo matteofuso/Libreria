@@ -3,13 +3,13 @@ include "../functions/Database.php";
 include "../functions/Log.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $title = trim($_POST['title']) ?? '';
-    $genre = trim($_POST['genre']) ?? '';
-    $new_genre = trim($_POST['new-genre']) ?? '';
-    $price = trim($_POST['price']) ?? '';
-    $author = trim($_POST['author']) ?? '';
-    $new_author = trim($_POST['new-author']) ?? '';
-    $year = trim($_POST['year']) ?? '';
+    $title = trim($_POST['title'] ?? '');
+    $genre = trim($_POST['genre'] ?? '');
+    $new_genre = trim($_POST['new-genre'] ?? '');
+    $price = trim($_POST['price'] ?? '');
+    $author = trim($_POST['author'] ?? '');
+    $new_author = trim($_POST['new-author'] ?? '');
+    $year = trim($_POST['year'] ?? '');
 
     if (empty($title) || empty($genre) || empty($price) || empty($author) || empty($year) || ($author === '-1' && empty($new_author)) || ($genre === '-1' && empty($new_genre))) {
         http_response_code(400);

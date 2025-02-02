@@ -2,7 +2,7 @@
 include 'functions/Database.php';
 Database::connect();
 include 'functions/Helpers.php';
-include 'functions/Log.php';
+include_once 'functions/Log.php';
 $title = "Modifica";
 ?>
 

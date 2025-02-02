@@ -1,7 +1,7 @@
 <?php
 include 'functions/Database.php';
 Database::connect();
-include 'functions/Log.php';
+include_once 'functions/Log.php';
 $title = "Inserisci";
 ?>
 <?php require 'componenti/header.php'; ?>

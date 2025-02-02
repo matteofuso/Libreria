@@ -1,9 +1,10 @@
 <?php
+include 'Log.php';
 
 class Database
 {
     private static ?PDO $PDO = null;
-    private static ?bool $connectionFailed = null;
+    private static bool $connectionFailed = false;
 
     public static function select(string $query, array $bind = []): array
     {
@@ -34,6 +35,7 @@ class Database
                 ]);
             } catch (PDOException $e) {
                 self::$connectionFailed = true;
+                Log::errlog($e, 'log/database.log');
             }
         }
         return self::$PDO;
