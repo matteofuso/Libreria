@@ -1,8 +1,9 @@
 <?php
-include 'functions/Database.php';
-Database::connect();
-include 'functions/Helpers.php';
-include_once 'functions/Log.php';
+include 'utils/Database.php';
+$config = require 'config.php';
+Database::connect($config);
+include 'utils/Helpers.php';
+include_once 'utils/Log.php';
 $title = "Modifica";
 ?>
 
@@ -16,8 +17,8 @@ $title = "Modifica";
     try {
         $libri = Database::select($query);
         Helpers::printTable(["#", "Titolo", "Autore", "Genere", "Prezzo", "Anno di Pubblicazione", "Azione"], $libri, [
-                function($row) { return '<button class="btn btn-primary btn-sm d-inline-flex align-items-center me-2" data-bs-toggle="modal" data-bs-target="#editLibro" onclick="editLibro(this, '. $row->id . ')"><svg class="bi my-1 theme-icon-active" width="1em" height="1em"><use href="#edit"></use></svg></button>'; },
-                function($row) { return '<button class="btn btn-danger btn-sm d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#deleteForm" onclick="deleteResource(\'libri\', '. $row->id . ')"><svg class="bi my-1 theme-icon-active" width="1em" height="1em"><use href="#delete"></use></svg></button>'; },
+                function($row) { return '<button class="btn btn-primary btn-sm me-2 px-2" data-bs-toggle="modal" data-bs-target="#editLibro" onclick="editLibro(this, '. $row->id . ')"><i class="bi bi-pencil"></i></button>'; },
+                function($row) { return '<button class="btn btn-danger btn-sm px-2" data-bs-toggle="modal" data-bs-target="#deleteForm" onclick="deleteResource(\'libri\', '. $row->id . ')"><i class="bi bi-trash"></i></button>'; },
         ]);
     } catch (Exception $e) {
         echo '<p>Non ci è stato possibile visualizzare i libri, perfavore riprova più tardi</p>';
@@ -34,8 +35,8 @@ $title = "Modifica";
         try {
             $libri = Database::select($query);
             Helpers::printTable(["#", "Nome", "Azione"], $libri, [
-                function($row) { return '<button class="btn btn-primary btn-sm d-inline-flex align-items-center me-2" data-bs-toggle="modal" data-bs-target="#editForm" onclick="editResource(this, \'autori\', '. $row->id . ')"><svg class="bi my-1 theme-icon-active" width="1em" height="1em"><use href="#edit"></use></svg></button>'; },
-                function($row) { return '<button class="btn btn-danger btn-sm d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#deleteForm" onclick="deleteResource(\'autori\', '. $row->id . ')"><svg class="bi my-1 theme-icon-active" width="1em" height="1em"><use href="#delete"></use></svg></button>'; },
+                function($row) { return '<button class="btn btn-primary btn-sm me-2 px-2" data-bs-toggle="modal" data-bs-target="#editForm" onclick="editResource(this, \'autori\', '. $row->id . ')"><i class="bi bi-pencil"></i></button>'; },
+                function($row) { return '<button class="btn btn-danger btn-sm px-2" data-bs-toggle="modal" data-bs-target="#deleteForm" onclick="deleteResource(\'autori\', '. $row->id . ')"><i class="bi bi-trash"></i></button>'; },
         ]);
         } catch (Exception $e) {
             echo '<p>Non ci è stato possibile visualizzare i libri, perfavore riprova più tardi</p>';
@@ -51,8 +52,8 @@ $title = "Modifica";
         try {
             $libri = Database::select($query);
             Helpers::printTable(["#", "Genere", "Azione"], $libri, [
-                function($row) { return '<button class="btn btn-primary btn-sm d-inline-flex align-items-center me-2" data-bs-toggle="modal" data-bs-target="#editForm" onclick="editResource(this, \'generi\', '. $row->id . ')"><svg class="bi my-1 theme-icon-active" width="1em" height="1em"><use href="#edit"></use></svg></button>'; },
-                function($row) { return '<button class="btn btn-danger btn-sm d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#deleteForm" onclick="deleteResource(\'generi\', '. $row->id . ')"><svg class="bi my-1 theme-icon-active" width="1em" height="1em"><use href="#delete"></use></svg></button>'; },
+                function($row) { return '<button class="btn btn-primary btn-sm me-2 px-2" data-bs-toggle="modal" data-bs-target="#editForm" onclick="editResource(this, \'generi\', '. $row->id . ')"><i class="bi bi-pencil"></i></button>'; },
+                function($row) { return '<button class="btn btn-danger btn-sm px-2" data-bs-toggle="modal" data-bs-target="#deleteForm" onclick="deleteResource(\'generi\', '. $row->id . ')"><i class="bi bi-trash"></i></button>'; },
             ]);
         } catch (Exception $e) {
             echo '<p>Non ci è stato possibile visualizzare i libri, perfavore riprova più tardi</p>';

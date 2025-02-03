@@ -1,6 +1,7 @@
 <?php
-include "../functions/Database.php";
-include_once "../functions/Log.php";
+include "../utils/Database.php";
+include_once "../utils/Log.php";
+$config = require '../config.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = trim($_POST['title'] ?? '');
@@ -16,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    if (Database::connect() == null)
+    if (Database::connect($config) == null)
     {
         header("Location: ../inserisci.php?err=0");
         exit();

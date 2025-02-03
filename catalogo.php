@@ -1,8 +1,9 @@
 <?php
-include 'functions/Database.php';
-Database::connect();
-include 'functions/Helpers.php';
-include_once 'functions/Log.php';
+include 'utils/Database.php';
+$config = require 'config.php';
+Database::connect($config);
+include 'utils/Helpers.php';
+include_once 'utils/Log.php';
 $title = "Catalogo";
 ?>
 

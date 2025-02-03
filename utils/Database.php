@@ -19,7 +19,7 @@ class Database
         return $stm->fetchAll();
     }
 
-    public static function connect(string $driver = 'mysql', string $host = 'localhost', string $dbname = 'libreria', string $user = 'root', string $password = '', bool $retry = false): ?PDO
+    public static function connect(array $config, bool $retry = false): ?PDO
     {
         if (self::$PDO !== null) {
             return self::$PDO;
@@ -27,9 +27,9 @@ class Database
         if (!self::$connectionFailed || $retry) {
             try {
                 self::$PDO = new PDO(
-                    "$driver:host=$host;dbname=$dbname",
-                    $user,
-                    $password, [
+                    "$config[driver]:host=$config[host];dbname=$config[dbname]",
+                    $config['user'],
+                    $config['password'], [
                     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
                 ]);
@@ -39,6 +39,11 @@ class Database
             }
         }
         return self::$PDO;
+    }
+
+    public static function isConnected(): bool
+    {
+        return self::$PDO !== null;
     }
 
     public static function query(string $query, array $bind = []): void
