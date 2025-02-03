@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $genre = $genres[0]->id;
             } else {
                 Database::query('insert into generi (genere) values (:genere)', [':genere' => $new_genre]);
-                $genre = Database::connect()->lastInsertId();
+                $genre = Database::connect($config)->lastInsertId();
             }
         }
     } catch (Exception $e) {
@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $author = $authors[0]->id;
             } else {
                 Database::query('insert into autori (nome) values (:nome)', [':nome' => $new_author]);
-                $author = Database::connect()->lastInsertId();
+                $author = Database::connect($config)->lastInsertId();
             }
         }
     } catch (Exception $e) {
