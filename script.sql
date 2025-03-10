@@ -5,15 +5,11 @@ create table autori (
 	id INT auto_increment primary key,
 	nome varchar(52)
 );
-drop table autori;
-select * from autori;
 
 create table generi (
 	id INT auto_increment primary key,
 	genere varchar(52)
 );
-drop table generi;
-select * from generi;
 
 create table libri (
     id INT auto_increment primary key,
@@ -25,8 +21,6 @@ create table libri (
     foreign key (autore) references autori(id),
     foreign key (genere) references generi(id)
 );
-drop table libri;
-select * from libri;
 
 INSERT INTO autori (nome) VALUES
 ('J.K. Rowling'),
@@ -48,7 +42,3 @@ INSERT INTO libri (titolo, autore, genere, prezzo, anno_pubblicazione) VALUES
 ('Il Signore degli Anelli', 3, 1, 30.50, 1954),
 ('Assassinio sull\'Orient Express', 4, 2, 15.99, 1934),
 ('Shining', 5, 3, 20.00, 1977);
-
-select l.id as "#", l.titolo, a.nome as autore, g.genere, l.prezzo, l.anno_pubblicazione from libri l
-join autori a on a.id = l.autore
-join generi g on g.id = l.genere;
